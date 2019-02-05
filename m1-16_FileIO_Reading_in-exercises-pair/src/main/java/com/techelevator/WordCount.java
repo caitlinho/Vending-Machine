@@ -14,8 +14,6 @@ public class WordCount {
 		
 		int wordCount = 0;
 		int lineNumber = 0;
-		int startingLine = 168;
-		int endLine = 3637;
 		int sentenceCount = 0;
 		 
 		try(Scanner fileScanner = new Scanner(inputFile)) {  
