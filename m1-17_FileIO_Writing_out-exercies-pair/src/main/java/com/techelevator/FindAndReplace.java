@@ -24,20 +24,39 @@ public class FindAndReplace {
 			while (newScanner.hasNextLine()){
 				
 				thisLine = newScanner.nextLine();
+				String changedLine;
 				
 				if (thisLine.contains(wordToReplace)) {
-					String changedLine = thisLine.replace(wordToReplace, wordToReplaceWith);
+					changedLine = thisLine.replaceAll(wordToReplace, wordToReplaceWith);
 					bufferedWriter.write(changedLine + "\n");
-					bufferedWriter.flush();
+					//bufferedWriter.flush();
+				} else {
+					bufferedWriter.write(thisLine + "\n");
 				}
-				
 			}
 		}
-		
-		
-		
-
 	}
+//				if (thisLine.contains(wordToReplace)) {
+//				
+//					String [] wordList = thisLine.split(" ");
+//					String [] newWordList = new String[wordList.length];
+//					
+//					for (int i = 0; i < wordList.length; i++) {
+//						if (wordList[i] ==  wordToReplace) {
+//							newWordList[i] = wordToReplaceWith;
+//						}
+//						newWordList [i] = wordList [i];
+//					}
+//					for (int i = 0; i < newWordList.length; i++) {
+//						changedLine = newWordList[i] + " ";
+//					}
+//					bufferedWriter.write(changedLine + "\n");
+//				}
+//					bufferedWriter.write(thisLine + "\n");
+//				}
+				
+
+	
 	
 	private static File getFileFromUser() {
 		

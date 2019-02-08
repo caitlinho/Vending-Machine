@@ -21,35 +21,21 @@ import com.techelevator.vendingmachine.exception.LoadVendingMachineException;
 
 public class FileItemReader implements FileReader {
 	
-	private String filePath = "/m1-java-capstone-vending-machine/vendingmachine.csv";
-	
-	
-	//File filePath = new File("/m1-java-capstone-vending-machine/vendingmachine.csv");
-	
-	/*
-	 * Constructor 
-	 */
-	public FileItemReader (String filePath) {
-		this.filePath = filePath;
-	}
-	
-	
+	private String filePath = "vendingmachine.csv";
 	
 	@Override
-	public List<Item> read() throws LoadVendingMachineException {
-		
-		List<String> itemsLines = new ArrayList<>();
-		
+	public MachineInventory read() throws LoadVendingMachineException {
+		List<String> line;
 		try {
-			itemsLines = readFile();
-		} catch (FileNotFoundException e) {
-			throw new LoadVendingMachineException ("File Not Found", e);
+			line = readFile();
+		} catch(FileNotFoundException e) {
+			throw new LoadVendingMachineException("File Not Found", e);
 		}
-		
-		return buildItemsFromFile(itemsLines);
+		return buildItemsFromFile(line);
 	}
 	
 	//Reading Vendingmachine.csv and putting items in a List.
+	
 	private List<String> readFile() throws FileNotFoundException {
 			
 		List<String> itemsLines = new ArrayList<>();
@@ -59,75 +45,40 @@ public class FileItemReader implements FileReader {
 		try (Scanner newScanner = new Scanner(inputFile)) {
 			while(newScanner.hasNextLine()) {
 				itemsLines.add(newScanner.nextLine());
-			}
-				
+			}	
 		}
-			return itemsLines;
+		return itemsLines;
 	}
 	
 	
-	private List<Item> buildItemsFromFile(List<String> itemsLines) {
+	private MachineInventory buildItemsFromFile(List<String> itemsLines) {
+		
 		String[] itemInfo = null;
 		List<Item> items = new ArrayList<Item>();
 		
 		//Instantiate a Machine Inventory instance
 				MachineInventory inventory = new MachineInventory();
+		//Instantiate Item class
+				
 		
 		for (String thisLine : itemsLines) {
+			Item thisItem = new Item("", "", 0.00, 5);	//initial quantity of 5
 			if (thisLine == null) {
-				continue;
+				continue; 
 			}
-			itemInfo = thisLine.split("\\|");
-	
-		/*
-		 * Creating 5 instances of Chips
-		 */
-		List<Item> chipList = new ArrayList<>();
-			if(itemInfo[0].contains("A")) {
-				for (int i = 1; i <= 5; i++) {
-				Chips chips = new Chips(itemInfo[1], new BigDecimal(itemInfo[2]));
-				chipList.add(chips);
-				}
-				inventory.addItemToSlot(itemInfo[0], chipList);
-			}
-		
-			/*
-			 * Creating 5 instances of Candy
-			 */
-			List<Item> candyList = new ArrayList<>();
-				if(itemInfo[0].contains("B")) {
-					for (int i = 1; i <= 5; i++) {
-					Candy candy = new Candy(itemInfo[1], new BigDecimal(itemInfo[2]));
-					candyList.add(candy);
-					}
-					inventory.addItemToSlot(itemInfo[0], candyList);
-				}
-	
-				/*
-				 * Creating 5 instances of Drink
-				 */
-				List<Item> drinkList = new ArrayList<>();
-					if(itemInfo[0].contains("C")) {
-						for (int i = 1; i <= 5; i++) {
-						Drink drink = new Drink(itemInfo[1], new BigDecimal(itemInfo[2]));
-						drinkList.add(drink);
-						}
-						inventory.addItemToSlot(itemInfo[0], candyList);
-					}
-					/*
-					 * Creating 5 instances of Gum
-					 */
-					List<Item> gumList = new ArrayList<>();
-
-						if(itemInfo[0].contains("D")) {
-							for (int i = 1; i <= 5; i++) {
-							Gum gum = new Gum(itemInfo[1], new BigDecimal(itemInfo[2]));
-							gumList.add(gum);
-							}
-							inventory.addItemToSlot(itemInfo[0], gumList);
-						}
+				//Splitting the incoming String line
+			
+				itemInfo = thisLine.split("\\|");
+				
+				thisItem.setSlot(itemInfo[0]);
+				thisItem.setName(itemInfo[1]);
+				thisItem.setPrice(Double.parseDouble(itemInfo[2]));
+				
+				inventory.addItemToSlot(itemInfo[0], thisItem);
+			
 		}
-		return items;
+		
+				return inventory;
 	}
 		
 }

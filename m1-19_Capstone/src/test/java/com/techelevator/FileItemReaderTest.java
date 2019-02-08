@@ -6,15 +6,27 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.PUBLIC_MEMBER;
+
 
 import com.techelevator.FileReader.FileItemReader;
+import com.techelevator.machine.MachineInventory;
+import com.techelevator.vendingmachine.exception.LoadVendingMachineException;
 
 
 public class FileItemReaderTest {
 
-	public static void main (String[] args) {
+	private FileItemReader fileReader;
 	
+	@Before
+	public void setup() {
+		fileReader = new FileItemReader();
 	}
-		
+	
+	@Test
+	public void machine_iinventory_was_created() throws LoadVendingMachineException {
+		//Arrange
+		MachineInventory inventory = fileReader.read();
+		//Assert
+		Assert.assertEquals("Potato Crisps",inventory.getInventory().get("A1").getName());
+	}
 }

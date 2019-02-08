@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.print.attribute.Size2DSyntax;
 
@@ -15,44 +16,38 @@ import com.techelevator.Items.Item;
 public class MachineInventory {
 	
 	
-	Map<String, List<Item>> inventory = new HashMap<String, List<Item>>();
+	Map<String, Item> inventory = new TreeMap<String, Item>();
 	
 	/*
 	 * method to add items to inventory
 	 */
 	
-	public void addItemToSlot(String slot, List<Item>items) {
-		 inventory.put(slot, items);
+	public void addItemToSlot(String slot, Item item) {
+		 this.inventory.put(slot, item);
 	}
 	
-	public List<Item> removeItemFromSlot(String slot) {
+	public void removeItemFromSlot(String slot) {
 		/*
-		 * we are taking list of Objects and assigning it to List
+		 * getting the Quantity from Item class .get() method
+		 * decrementing by 1
+		 * setting the new Quantity in Item class via .set() method
 		 */
-		List<Item >thisItem = inventory.get(slot);
-		/*
-		 * removing one instance of object from the List
-		 */
-		thisItem.remove(0);
-		/*
-		 * updating the inventory
-		 */
-		inventory.put(slot, removeItemFromSlot(slot));
-		//return chipsItems.size();
-		
-		return thisItem;
+		this.inventory.get(slot).setQuantity(this.inventory.get(slot).getQuantity() - 1);  
 	}
 	/*
-	 * method to use when display of items is needed
-	 * inquiry of stock is made
+	 * method to get price of a given slot
 	 */
-	public Map<String, List<Item>> getInventory(String slot) {
-		
-		return this.inventory;
+	
+	public double getPriceofSlot (String slot) {
+		return inventory.get(slot).getPrice();
 	}
 	
-	 
+	/*
+	 * GETTER for display
+	 */
 	
-	
+	public Map<String, Item> getInventory() {		
+		return this.inventory;
+	}
 
 }
