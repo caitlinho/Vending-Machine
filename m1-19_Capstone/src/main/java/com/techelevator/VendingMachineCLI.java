@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import com.techelevator.FileReader.FileItemReader;
+import com.techelevator.vendingmachine.exception.LoadVendingMachineException;
 import com.techelevator.view.Menu;
 
 public class VendingMachineCLI {
@@ -15,7 +17,7 @@ public class VendingMachineCLI {
 		this.menu = menu;
 	}
 	
-	public void run() {
+	public void run(){
 		while(true) {
 			String choice = (String)menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			
@@ -23,6 +25,13 @@ public class VendingMachineCLI {
 				// display vending machine items
 			} else if(choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
+			}
+			try{
+				FileItemReader testFileItemReader = new FileItemReader("vendingmachine.csv");
+			
+			testFileItemReader.read();
+			}catch (Exception e){
+				e.printStackTrace();
 			}
 		}
 	}
