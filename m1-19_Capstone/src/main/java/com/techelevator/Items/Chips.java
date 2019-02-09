@@ -9,13 +9,9 @@ public class Chips extends Item{
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public String consumeSound() {
 		String sound = ("Crunch Crunch, Yum!");
 		return sound;	
 	}
-	
-
-
-	
+		
 }

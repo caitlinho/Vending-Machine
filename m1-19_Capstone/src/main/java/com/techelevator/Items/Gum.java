@@ -13,6 +13,5 @@ public class Gum extends Item {
 		String sound = ("Chew Chew, Yum!");
 		return sound;	
 	}
-	
 
 }

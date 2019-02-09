@@ -9,12 +9,9 @@ public class Drink extends Item {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public String consumeSound() {
 		String sound = ("Glug Glug, Yum!");
 		return sound;	
 	}
-	
-	
 
 }

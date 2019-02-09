@@ -58,10 +58,7 @@ public class Menu {
 		out.flush();
 	}
 	
-	public void displayCurrentBalance(double currentBalance) {
-		System.out.println("Current Money Provided: $" + currentBalance);
-	}
-	
+	//Display Inventory
 	public void displayVendingMachineItems(Map<String, Item> inventoryMap) {	
 		for (String thisValue : inventoryMap.keySet()) {
 			String slot = inventoryMap.get(thisValue).getSlot();
@@ -77,36 +74,40 @@ public class Menu {
 		}	
 	}
 	
-	//playing how to get money from use
-		public double getTenderFromUser() {
-			
-			System.out.println("Please enter amount ($1, $2, $5, $10): " );
-			String tender = in.nextLine();
-			String removeDollarSign = tender.substring(1);
-			
-			double tenderAmount = Double.parseDouble(removeDollarSign);
-			
-		
-			return tenderAmount;
+	//Display CURRENT BALANCE
+		public void displayCurrentBalance(double currentBalance) {
+			System.out.printf("Current Money Provided: $%.2f", currentBalance);
 		}
 	
-	//Capturing Users product selection
+	//get money from user
+	public double getTenderFromUser() {
+		System.out.println("\nPlease enter amount ($1, $2, $5, $10)>>> " );
+		String tender = in.nextLine();
+		String removeDollarSign = tender.substring(1);
+		double tenderAmount = Double.parseDouble(removeDollarSign);
+		return tenderAmount;
+	}
 	
+	//Capturing Users product selection
 	public String getProductChoice() {
-		
-		System.out.println("Please select product: ");
+		System.out.println("\nPlease select product>>> ");
 		String productChoice = in.nextLine();
 		return productChoice;
 	}
 	
 	//Printing Users change
-	
 	public void printUsersChange(String yourChange) {
+		System.out.println();
 		System.out.println(yourChange);
 	}
 	
-	//Print stupid noises
+	//Printing list of item purchased
+	public void printItemsPurchased(String item) {
+		System.out.println();
+		System.out.println(item + "\n");
+	}
 	
+	//Printing stupid noises
 	public void printConsumedMessage(String message) {
 		System.out.println(message);
 	}

@@ -7,6 +7,7 @@ import com.techelevator.CashRegister.UserMoney;
 import com.techelevator.FileReader.FileItemReader;
 import com.techelevator.Items.Item;
 import com.techelevator.machine.MachineInventory;
+import com.techelevator.shoppingcart.ShoppingCart;
 import com.techelevator.vendingmachine.exception.LoadVendingMachineException;
 import com.techelevator.view.Menu;
 
@@ -29,6 +30,7 @@ public class VendingMachineCLI {
 	FileItemReader thisFileItemReader;
 	MachineInventory inventory;
 	UserMoney userMoney;
+	ShoppingCart shoppingCart;
 	
 	
 	public VendingMachineCLI(Menu menu) {
@@ -36,6 +38,7 @@ public class VendingMachineCLI {
 		this.inventory = new MachineInventory();
 		this.thisFileItemReader = new FileItemReader();
 		this.userMoney = new UserMoney();
+		this.shoppingCart = new ShoppingCart(null);
 	}
 	
 	public void run() {
@@ -55,37 +58,58 @@ public class VendingMachineCLI {
 			} else if(choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
 				// do purchase
 				while(true) {
-					String choice2 = (String)menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
 					
-					double currentBalance = userMoney.getBalance();
-					menu.displayCurrentBalance(currentBalance);
+					String choice2 = (String)menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
+					//display current balance
+					menu.displayCurrentBalance(userMoney.getBalance());
 					
 					if (choice2.equals(SUB_MENU_OPTION_FEED_MONEY)) {
-						 menu.getTenderFromUser();
 						 
+						 //getting tendered amount from user
+						 double tenderAmount = menu.getTenderFromUser();
+						 userMoney.setBalance(tenderAmount);
+						 //display current balance
+						 menu.displayCurrentBalance(userMoney.getBalance());
+						 						 
 					} else if (choice2.equals(SUB_MENU_OPTION_SELECT_PRODUCT)) {
-						//functionality to catch invalid product code entered
-						// and return user to "Please Select product"
-						String slot = menu.getProductChoice();
-						inventory.removeItemFromSlot(slot);
-						double price = inventory.getInventory().get(slot).getPrice();
-						userMoney.buyProduct(price);	
-					} else if (choice2.equals(SUB_MENU_OPTION_FINISH_TRANSACTION)) {
-						menu.printUsersChange(userMoney.getChange());
-//						menu.printConsumedMessage(inventory.getInventory().get(slot));
-//						menu.printConsumeMessage(<>);		//Items - slot key
-//						menu.printListOfItemsBought(<>);	//shopping cart
 						
+							/*functionality to catch invalid product code entered*/
+							
+							//get slot number from user
+							String slot = menu.getProductChoice();
+							//add product choice to the list of user choice in ShoppingCart
+							shoppingCart.setItemsPurchased(slot);
+							//remove that item from inventory
+							inventory.removeItemFromSlot(slot);
+							//subtracting price of product from current balance
+							userMoney.buyProduct(inventory.getInventory().get(slot).getPrice());
+							
+							//display current balance
+							menu.displayCurrentBalance(userMoney.getBalance());
+							
+							
+					} else if (choice2.equals(SUB_MENU_OPTION_FINISH_TRANSACTION)) {
+							
+							//display change owed to user
+							menu.printUsersChange(userMoney.getChange());
+							
+							//print list of items purchased
+							for(String thisItem : shoppingCart.getItemsPurchased()) {
+								menu.printItemsPurchased(inventory.getInventory().get(thisItem).getName());
+							}
+							
+							//print consumed message
+							for(String thisItem : shoppingCart.getItemsPurchased()) {
+								menu.printConsumedMessage(inventory.getInventory().get(thisItem).getSound());
+							}
+							
+							break;
+						}
 					}
-					break;
+				
 				}
 			}
-			
-			/*
-			 * use when need to debug
-			 */
-			
-		}
+		
 	}
 	
 	public static void main(String[] args) {

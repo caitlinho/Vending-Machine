@@ -39,15 +39,14 @@ public class UserMoney {
 			numberOfPennies = change / 1;
 			change = change % 1;
 		}
-		String yourChange = ("your Change is: \n" + numberOfQuarters + "Quarters " + numberOfDimes + "Dimes " + numberOfNickles + "Nickles " + numberOfPennies + "Pennies ");
-		
+		String yourChange = ("your Change is: \n" + numberOfQuarters + " Quarters " + 
+								numberOfDimes + " Dimes " + numberOfNickles + 
+								" Nickles " + numberOfPennies + " Pennies ");
+	
 		return yourChange;
 	}
 	
-	
-	
 	//Getter and Setter
-	
 	public double getTenderAmount() {
 		return tenderAmount;
 	}
@@ -60,7 +59,5 @@ public class UserMoney {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	
-	
 
 }
