@@ -20,9 +20,9 @@ public class AuditLog {
 			printWriter.write(dateString);
 			printWriter.format("       %-20s $%-8.2f $%-4.2f", transaction, tender, balance);
 			printWriter.println();
-	}
-	catch (Exception e) {
-		return;
-	}
+		}
+		catch (Exception e) {
+			return;
+		}
 	}
 }
