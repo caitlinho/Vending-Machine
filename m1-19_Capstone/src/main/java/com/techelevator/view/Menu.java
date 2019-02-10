@@ -69,7 +69,6 @@ public class Menu {
 				System.out.printf("%-5s %-21s $%-8.2f %-11s \n", slot, name, price, quantity + " Remaining");
 			} else {
 				System.out.printf("%-5s %-21s $%-8.2f %-11s \n", slot, name, price,  " Sold Out");
-
 			}
 		}	
 	}
@@ -79,13 +78,18 @@ public class Menu {
 			System.out.printf("Current Money Provided: $%.2f", currentBalance);
 		}
 	
-	//get money from user
+	//Get money from user
 	public double getTenderFromUser() {
 		System.out.print("\nPlease enter amount ($1, $2, $5, $10)>>> " );
 		String tender = in.nextLine();
 		String removeDollarSign = tender.substring(1);
 		double tenderAmount = Double.parseDouble(removeDollarSign);
 		return tenderAmount;
+	}
+	
+	//Please enter valid input
+	public void enterValidInput() {
+		System.out.print("\nPlease enter choice from given options");
 	}
 	
 	//Capturing Users product selection
@@ -95,12 +99,12 @@ public class Menu {
 		return productChoice;
 	}
 	
-	//check if balance is greater than price
+	//Check if balance is greater than price
 	public void insufficientFunds() {
 		System.out.println("\nInsert more money");
 	}
 	
-	//printing sold out message
+	//Printing sold out message
 	public void soldOutMessage() {
 		System.out.print("Product Sold OUT");
 	}
@@ -119,11 +123,12 @@ public class Menu {
 	//Printing list of item purchased
 	public void printItemsPurchased(String item) {
 		System.out.println();
-		System.out.println(item + "\n");
+		System.out.println(item);
 	}
 	
-	//Printing stupid noises
+	//Printing sounds
 	public void printConsumedMessage(String message) {
+		System.out.println();
 		System.out.println(message);
 	}
 	

@@ -62,6 +62,7 @@ public class VendingMachineCLI {
 			String choice = (String)menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 			
 			if(choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
+				
 				// display vending machine items
 				Map<String, Item> inventoryMap = inventory.getInventory();
 				menu.displayVendingMachineItems(inventoryMap);
@@ -71,31 +72,29 @@ public class VendingMachineCLI {
 				while(true) {
 					
 					String choice2 = (String)menu.getChoiceFromOptions(SUB_MENU_OPTIONS);
+					
 					//display current balance
 					menu.displayCurrentBalance(userMoney.getBalance());
 					
 					if (choice2.equals(SUB_MENU_OPTION_FEED_MONEY)) {
-						 
-						 //getting tendered amount from user
-						
-						 double tenderAmount = menu.getTenderFromUser();
-						 
-						 userMoney.addMoney(tenderAmount);
-						 shoppingCart.setFedMoney(tenderAmount);
-						 
-						 
-						 //display current balance
-						 menu.displayCurrentBalance(userMoney.getBalance());
-						 
-						 //write to log file
-						 auditLog.writeToFile("FEED MONEY", tenderAmount, userMoney.getBalance());
+						 try {
+							 //getting tendered amount from user
+							 double tenderAmount = menu.getTenderFromUser();
+							 userMoney.addMoney(tenderAmount);						 
+							 
+							 //display current balance
+							 menu.displayCurrentBalance(userMoney.getBalance());
+							 
+							 //write to log file
+							 auditLog.writeToFile("FEED MONEY", tenderAmount, userMoney.getBalance());
+						 } catch (NumberFormatException e) {
+								menu.enterValidInput();
+						}
 						 
 					} else if (choice2.equals(SUB_MENU_OPTION_SELECT_PRODUCT)) {
-								//get slot number from user
 						
-								String slot = null;
-								
-								slot = menu.getProductChoice().toUpperCase();
+								//get slot number from user								
+								String slot = menu.getProductChoice().toUpperCase();
 								
 								try {
 									//checking for sufficient funds
@@ -140,23 +139,17 @@ public class VendingMachineCLI {
 							//display change owed to user
 								menu.printUsersChange(userMoney.getChange());
 							
-							//print list of items purchased
+							//print list of items PURCHASED and CONSUMED sounds
 							for(String thisItem : shoppingCart.getItemsPurchased()) {
 								menu.printItemsPurchased(inventory.getInventory().get(thisItem).getName());
-							}
-							
-							//print consumed message
-							for(String thisItem : shoppingCart.getItemsPurchased()) {
 								String message = inventory.getInventory().get(thisItem).getSound(thisItem);
 								menu.printConsumedMessage(message);
 							}
-							
 							break;
 						}
 					}
 				}
 			}
-		
 	}
 	
 	public static void main(String[] args) throws LoadVendingMachineException, IOException {
