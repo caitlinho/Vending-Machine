@@ -62,7 +62,7 @@ public class FileItemReader implements FileReader {
 				
 		
 		for (String thisLine : itemsLines) {
-			Item thisItem = new Item("", "", 0.00, 5);	//initial quantity of 5
+			Item thisItem = new Item ("", "", 0.00, 5);	//initial quantity of 5
 			if (thisLine == null) {
 				continue; 
 			}

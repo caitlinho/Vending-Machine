@@ -22,34 +22,36 @@ public class Item {
 	}
 
 	//Getters and Setters
-	public String getSound() {
-		return sound;
+	public String getSound (String slot) {
+		String sound = null;
+		if (slot.contains("A")) {
+			return "Crunch, Crunch, Yum!";
+		} else if (slot.contains("B")) {
+			return "Munch, Munch, Yum!";
+		} else if (slot.contains("C")) {
+			return "Glug, Glug, Yum!";
+		} else if (slot.contains("D")) {
+			return "Chew, Chew , Yum!";	
+		}
+		
+		return null;
 	}
-
-	public void setSound(String sound) {
-		this.sound = sound;
-	}
-
+	
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public double getPrice() {
 		return price;
 	}
-
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
 	public int getQuantity() {
 		return quantity;
 	}
-
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}

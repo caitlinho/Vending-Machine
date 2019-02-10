@@ -25,14 +25,21 @@ public class MachineInventory {
 	public void addItemToSlot(String slot, Item item) {
 		 this.inventory.put(slot, item);
 	}
+	/*
+	 * method to check qty
+	 */
 	
+	public void checkProductQuantity() {
+		
+	}
 	public void removeItemFromSlot(String slot) {
 		/*
 		 * getting the Quantity from Item class .get() method
 		 * decrementing by 1
 		 * setting the new Quantity in Item class via .set() method
 		 */
-		this.inventory.get(slot).setQuantity(this.inventory.get(slot).getQuantity() - 1);  
+		int qty = this.inventory.get(slot).getQuantity();
+		this.inventory.get(slot).setQuantity(qty - 1); 
 	}
 	/*
 	 * method to get price of a given slot

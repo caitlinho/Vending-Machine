@@ -2,12 +2,11 @@ package com.techelevator.CashRegister;
 
 public class UserMoney {
 	
-	double tenderAmount;
 	double balance;
 	int change;
 	
-	public void addMoney() {
-		balance += tenderAmount;
+	public void addMoney(double money) {
+		balance = this.balance + money;
 	}
 	
 	public void buyProduct(double price) {
@@ -42,22 +41,22 @@ public class UserMoney {
 		String yourChange = ("your Change is: \n" + numberOfQuarters + " Quarters " + 
 								numberOfDimes + " Dimes " + numberOfNickles + 
 								" Nickles " + numberOfPennies + " Pennies ");
-	
+		balance = balance - change;
 		return yourChange;
 	}
 	
 	//Getter and Setter
 	public double getTenderAmount() {
-		return tenderAmount;
+		return balance;
 	}
-	public void setTenderAmount(double tenderAmount) {
-		this.tenderAmount = tenderAmount;
-	}
+//	public void setTenderAmount(double tenderAmount) {
+//		this.tenderAmount = tenderAmount;
+//	}
 	public double getBalance() {
 		return this.balance;
 	}
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}
+//	public void setBalance(double balance) {
+//		this.balance = balance;
+//	}
 
 }

@@ -65,7 +65,7 @@ public class Menu {
 			String name = inventoryMap.get(thisValue).getName();
 			double price = inventoryMap.get(thisValue).getPrice();
 			int quantity = inventoryMap.get(thisValue).getQuantity();
-			if (quantity != 0) {
+			if (quantity > 0) {
 				System.out.printf("%-5s %-21s $%-8.2f %-11s \n", slot, name, price, quantity + " Remaining");
 			} else {
 				System.out.printf("%-5s %-21s $%-8.2f %-11s \n", slot, name, price,  " Sold Out");
@@ -81,7 +81,7 @@ public class Menu {
 	
 	//get money from user
 	public double getTenderFromUser() {
-		System.out.println("\nPlease enter amount ($1, $2, $5, $10)>>> " );
+		System.out.print("\nPlease enter amount ($1, $2, $5, $10)>>> " );
 		String tender = in.nextLine();
 		String removeDollarSign = tender.substring(1);
 		double tenderAmount = Double.parseDouble(removeDollarSign);
@@ -89,10 +89,25 @@ public class Menu {
 	}
 	
 	//Capturing Users product selection
-	public String getProductChoice() {
-		System.out.println("\nPlease select product>>> ");
+	public String getProductChoice() {	
+		System.out.print("\nPlease select product>>> ");
 		String productChoice = in.nextLine();
 		return productChoice;
+	}
+	
+	//check if balance is greater than price
+	public void insufficientFunds() {
+		System.out.println("\n Insert more money");
+	}
+	
+	//printing sold out message
+	public void soldOutMessage() {
+		System.out.print("Product Sold OUT");
+	}
+	
+	//printing product does not exist
+	public void productDoesNotMessage() {
+		System.out.print("Product DOES NOT EXIST");
 	}
 	
 	//Printing Users change
