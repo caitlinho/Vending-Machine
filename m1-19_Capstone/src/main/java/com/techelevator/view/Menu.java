@@ -74,9 +74,9 @@ public class Menu {
 	}
 	
 	//Display CURRENT BALANCE
-		public void displayCurrentBalance(double currentBalance) {
-			System.out.printf("Current Money Provided: $%.2f", currentBalance);
-		}
+	public void displayCurrentBalance(double currentBalance) {
+		System.out.printf("Current Money Provided: $%.2f", currentBalance);
+	}
 	
 	//Get money from user
 	public double getTenderFromUser() {

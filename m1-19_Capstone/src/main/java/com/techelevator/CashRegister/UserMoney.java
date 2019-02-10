@@ -22,7 +22,6 @@ public class UserMoney {
 		change = (int) (balance * 100);
 		
 		while(change >=  25) {
-			
 			numberOfQuarters = change / 25;
 			change = change % 25;
 		}
@@ -44,19 +43,8 @@ public class UserMoney {
 		balance = balance - change;
 		return yourChange;
 	}
-	
-	//Getter and Setter
-	public double getTenderAmount() {
-		return balance;
-	}
-//	public void setTenderAmount(double tenderAmount) {
-//		this.tenderAmount = tenderAmount;
-//	}
+
 	public double getBalance() {
 		return this.balance;
 	}
-//	public void setBalance(double balance) {
-//		this.balance = balance;
-//	}
-
 }

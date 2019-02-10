@@ -34,14 +34,11 @@ public class FileItemReader implements FileReader {
 		return buildItemsFromFile(line);
 	}
 	
-	//Reading Vendingmachine.csv and putting items in a List.
+	//Reading vendingmachine.csv and putting items in a List.
 	
-	private List<String> readFile() throws FileNotFoundException {
-			
+	private List<String> readFile() throws FileNotFoundException {	
 		List<String> itemsLines = new ArrayList<>();
-			
-		File inputFile = new File(filePath);
-			
+		File inputFile = new File(filePath);	
 		try (Scanner newScanner = new Scanner(inputFile)) {
 			while(newScanner.hasNextLine()) {
 				itemsLines.add(newScanner.nextLine());
@@ -50,18 +47,17 @@ public class FileItemReader implements FileReader {
 		return itemsLines;
 	}
 	
-	
 	private MachineInventory buildItemsFromFile(List<String> itemsLines) {
 		
 		String[] itemInfo = null;
 		List<Item> items = new ArrayList<Item>();
 		
 		//Instantiate a Machine Inventory instance
-				MachineInventory inventory = new MachineInventory();
-		//Instantiate Item class
-				
+		MachineInventory inventory = new MachineInventory();
 		
 		for (String thisLine : itemsLines) {
+			
+			//Instantiate Item class
 			Item thisItem = new Item ("", "", 0.00, 5);	//initial quantity of 5
 			if (thisLine == null) {
 				continue; 
@@ -75,10 +71,7 @@ public class FileItemReader implements FileReader {
 				thisItem.setPrice(Double.parseDouble(itemInfo[2]));
 				
 				inventory.addItemToSlot(itemInfo[0], thisItem);
-			
 		}
-		
-				return inventory;
-	}
-		
+		return inventory;
+	}	
 }
