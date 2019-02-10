@@ -22,12 +22,6 @@ public class MachineInventory {
 		 this.inventory.put(slot, item);
 	}
 	
-<<<<<<< HEAD
-=======
-	/*
-	 * 
-	 */
->>>>>>> f424551460026b74ae8f21b88b690c6e834749de
 	public void removeItemFromSlot(String slot) {
 		/*
 		 * getting the Quantity from Item class .get() method
@@ -38,14 +32,8 @@ public class MachineInventory {
 		this.inventory.get(slot).setQuantity(qty - 1); 
 	}
 
-	/*
-<<<<<<< HEAD
-	 * GETTER for display
-=======
-	 * GETTER to display items
->>>>>>> f424551460026b74ae8f21b88b690c6e834749de
-	 */
-	
+
+//	GETTER to display items	
 	public Map<String, Item> getInventory() {		
 		return this.inventory;
 	}
