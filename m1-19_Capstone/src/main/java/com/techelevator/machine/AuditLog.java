@@ -15,7 +15,7 @@ public class AuditLog {
 	public void writeToFile (String transaction, double tender, double balance) throws IOException {
 		try (FileWriter auditLog = new FileWriter("Log.txt", true); PrintWriter printWriter = new PrintWriter(auditLog)) {
 			Date date = new Date();
-			DateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy hh:mm:ss");
+			DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss a");
 			String dateString = dateFormat.format(date);
 			printWriter.write(dateString);
 			printWriter.format("       %-20s $%-8.2f $%-4.2f", transaction, tender, balance);

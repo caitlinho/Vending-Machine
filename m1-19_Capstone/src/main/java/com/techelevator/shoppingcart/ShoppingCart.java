@@ -7,15 +7,11 @@ import com.techelevator.CashRegister.UserMoney;
 
 public class ShoppingCart {
 	
-	List<String> itemsPurchased;	//store one or all the purchases made by user in one transaction
-	UserMoney userMoney; 
-	List<Double> fedMoney;			//store the instances of money fed by the user
+	List<String> itemsPurchased;	//store all the purchases made by user in one transaction
 	
 	//Construct
 	public ShoppingCart(List<String> itemsPurchased) {
-		this.userMoney = new UserMoney();
 		this.itemsPurchased = new ArrayList<>();
-		this.fedMoney = new ArrayList<>();
 	}
 
 	//GETTER and SETTER
@@ -25,14 +21,5 @@ public class ShoppingCart {
 	public void setItemsPurchased(String slot) {
 		itemsPurchased.add(slot);
 		this.itemsPurchased = itemsPurchased;
-	}
-	public List<Double> getFedMoney() {
-		return fedMoney;
-	}
-	public void setFedMoney(double tenderAmount) {
-		fedMoney.add(tenderAmount);		//widening
-		this.fedMoney = fedMoney;
-	}
-	
-	
+	}	
 }
