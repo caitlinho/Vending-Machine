@@ -31,15 +31,12 @@ public class VendingMachineCLI {
 														SUB_MENU_OPTION_SELECT_PRODUCT,
 														SUB_MENU_OPTION_FINISH_TRANSACTION};
 	
-	
 	private Menu menu;
 	FileItemReader thisFileItemReader;
 	MachineInventory inventory;
 	UserMoney userMoney;
 	ShoppingCart shoppingCart;
 	AuditLog auditLog;
-	
-	
 	
 	public VendingMachineCLI(Menu menu) {
 		this.menu = menu;
@@ -49,9 +46,7 @@ public class VendingMachineCLI {
 		this.shoppingCart = new ShoppingCart(null);
 		this.auditLog = new AuditLog();
 	}
-	
-	
-	
+
 	public void run() throws LoadVendingMachineException, IOException {
 		try {
 			inventory = thisFileItemReader.read();

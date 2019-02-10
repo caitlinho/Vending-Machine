@@ -9,9 +9,7 @@ import com.techelevator.machine.MachineInventory;
 import com.techelevator.vendingmachine.exception.LoadVendingMachineException;
 
 public interface FileReader {
-	
-	
-	
+
 	MachineInventory read() throws LoadVendingMachineException;
 
 }

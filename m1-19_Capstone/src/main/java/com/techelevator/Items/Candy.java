@@ -1,10 +1,9 @@
 package com.techelevator.Items;
 
-import java.math.BigDecimal;
-
 public class Candy extends Item {
 
-	public Candy(String name, double price, int quantity, String slot) {
+	public Candy(String slot, String name, double price, int quantity) {
 		super(slot, name, price, quantity);
 	}
+	
 }

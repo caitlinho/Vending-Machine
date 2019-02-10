@@ -10,11 +10,7 @@ import javax.print.attribute.Size2DSyntax;
 
 import com.techelevator.Items.Item;
 
-
-
-
 public class MachineInventory {
-	
 	
 	Map<String, Item> inventory = new TreeMap<String, Item>();
 	
@@ -25,13 +21,10 @@ public class MachineInventory {
 	public void addItemToSlot(String slot, Item item) {
 		 this.inventory.put(slot, item);
 	}
-	/*
-	 * method to check qty
-	 */
 	
-	public void checkProductQuantity() {
-		
-	}
+	/*
+	 * 
+	 */
 	public void removeItemFromSlot(String slot) {
 		/*
 		 * getting the Quantity from Item class .get() method
@@ -41,16 +34,9 @@ public class MachineInventory {
 		int qty = this.inventory.get(slot).getQuantity();
 		this.inventory.get(slot).setQuantity(qty - 1); 
 	}
+
 	/*
-	 * method to get price of a given slot
-	 */
-	
-	public double getPriceofSlot (String slot) {
-		return inventory.get(slot).getPrice();
-	}
-	
-	/*
-	 * GETTER for display
+	 * GETTER to display items
 	 */
 	
 	public Map<String, Item> getInventory() {		
