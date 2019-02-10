@@ -97,7 +97,7 @@ public class Menu {
 	
 	//check if balance is greater than price
 	public void insufficientFunds() {
-		System.out.println("\n Insert more money");
+		System.out.println("\nInsert more money");
 	}
 	
 	//printing sold out message

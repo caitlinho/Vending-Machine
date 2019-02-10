@@ -101,33 +101,33 @@ public class VendingMachineCLI {
 									//checking for sufficient funds
 									if (userMoney.getBalance() < inventory.getInventory().get(slot).getPrice()) {
 										menu.insufficientFunds();
-									}
-									//add product choice to the list of user choice in ShoppingCart
-									shoppingCart.setItemsPurchased(slot);
-								
-										//check inventory
-									if (inventory.getInventory().get(slot).getQuantity() <= 0) {
-										menu.soldOutMessage();
 									} 
-									else {
-										//remove that item from inventory
-										inventory.removeItemFromSlot(slot);
+									else if (userMoney.getBalance() > inventory.getInventory().get(slot).getPrice()) {
 									
-									//write to log file
-									 auditLog.writeToFile(inventory.getInventory().get(slot).getName(),
-											 					userMoney.getBalance(), 
-											 					(userMoney.getBalance() - inventory.getInventory().get(slot).getPrice()));																
+										//add product choice to the list of user choice in ShoppingCart
+										shoppingCart.setItemsPurchased(slot);
 									
-									 //check current balance
-									 if (userMoney.getBalance() > inventory.getInventory().get(slot).getPrice()) {
-										//subtracting price of product from current balance
-										userMoney.buyProduct(inventory.getInventory().get(slot).getPrice());
-									 }
+										//check inventory
+										if (inventory.getInventory().get(slot).getQuantity() <= 0) {
+											menu.soldOutMessage();
+										} 
+										else {
+											//remove that item from inventory
+											inventory.removeItemFromSlot(slot);
+										
+											//write to log file
+											 auditLog.writeToFile(inventory.getInventory().get(slot).getName(),
+												 					userMoney.getBalance(), 
+												 					(userMoney.getBalance() - inventory.getInventory().get(slot).getPrice()));	
+												 
+											//subtracting price of product from current balance
+											userMoney.buyProduct(inventory.getInventory().get(slot).getPrice());
+										}
+									}
 									 
 									//display current balance
 									menu.displayCurrentBalance(userMoney.getBalance());	
-									
-								}
+						
 								} catch (NullPointerException e) {
 									menu.productDoesNotMessage();
 							}
